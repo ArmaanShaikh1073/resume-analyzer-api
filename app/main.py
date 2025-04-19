@@ -17,10 +17,17 @@ app = FastAPI(
     version="0.1.0"
 )
 
+# Get allowed origins from settings (frontend URL)
+allowed_origins = [
+    settings.FRONTEND_URL,
+    "https://skill-sync-ai-tau.vercel.app/",  # Replace with your actual Vercel domain
+    "http://localhost:3000"  # For local development
+]
+
 # Configure CORS to allow requests from your frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
